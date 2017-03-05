@@ -1,3 +1,6 @@
+[//]: # (Image References)
+[image1]: ./out5.jpg
+[image2]: ./out6.jpg
 
 # Rubric Points
 
@@ -18,11 +21,12 @@ The parameters and the color space were chosen after experimenting with differen
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-The training of the classifier is done in train.py.
-First, I read all the images and extract the features from them. This done in multiple processes in order to speed-up the training.
-After that the features are scaled using StandardScaler from sklearn.
-The final step is to run the classifier. I'm using the SVC linear classifier
-In the end, the trained classifier and the scaler are saved to files
+ The training of the classifier is done in train.py.
+
+* First, I read all the images and extract the features from them. This done in multiple processes in order to speed-up the training.
+* After that the features are scaled using StandardScaler from sklearn.
+* The final step is to run the classifier. I'm using the SVC linear classifier
+* In the end, the trained classifier and the scaler are saved to files
 
 ### Sliding Window Search
 
@@ -38,13 +42,18 @@ I've tried different scales and it end decided to keep 1.0, 1.5, 2.0 and 3.0. Th
 
 I've tuned the parameters of the feature extractors. I've also added decision function threshold.
 
+Here are some pictures before applying the heatmap:
+![alt text][image1]
+![alt text][image2]
+
 ### Video Implementation
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 Here's a [link to my video result](./out_aws.mp4)
-The upper-left corner of the video is the final result.
-The upper-right corner show the results before applying the heatmap.
-In the bottom, the heatmap itself is displayed
+
+* The upper-left corner of the video is the final result.
+* The upper-right corner show the results before applying the heatmap.
+* In the bottom, the heatmap itself is displayed
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
@@ -59,5 +68,7 @@ False positives are filtered by thresholding the decision function and by thresh
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 The training of the classifier is rather slow and tuning all the parameters takes a lot of trail and error.
+
 It is possible to make it more robust by adding some kind of tracking for the cars - the can only move a few pixels per frame, their scale should be determined by their position in the frame and they can't just pop up in the middle of the road. By checking for all this conditions, we can remove false positives.
+
 We can also make a more rigorous search (by reducing the classifier threshold, searching with more scales and etc) if a car suddenly disappears.
