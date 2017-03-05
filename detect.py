@@ -122,6 +122,5 @@ if __name__ == "__main__":
         X_scaler = pickle.load(handle)
     
     clip = VideoFileClip("project_video.mp4")
-    clip = clip.subclip(40, 41)
     processed_clip = clip.fl_image(parse_image)
     processed_clip.write_videofile("out.mp4", audio=False)
